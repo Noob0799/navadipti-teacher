@@ -1,0 +1,14 @@
+.heading {
+    background: black;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+.center-block {
+    display: block;
+    margin: 1rem auto;
+    text-align: center;
+}
