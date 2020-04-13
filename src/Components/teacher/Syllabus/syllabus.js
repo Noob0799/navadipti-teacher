@@ -3,6 +3,18 @@ import Navbar from '../../navbar';
 import Axios from 'axios';
 
 class syllabus extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            token: ''
+        };
+    }
+
+    componentDidMount() {
+        this.setState({
+            token: 'syllabus'
+        });
+    }
 
     addSyllabus() {
         const cclass = document.getElementById('cclass').value;
@@ -52,7 +64,7 @@ class syllabus extends React.Component {
     render() {
         return(
             <Fragment>
-                <Navbar />
+                <Navbar token={this.state.token}/>
                 <div className="jumbotron m-1">
                     <h5>Add Syllabus:</h5>
                 </div>

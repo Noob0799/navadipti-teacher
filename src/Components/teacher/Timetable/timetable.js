@@ -72,7 +72,7 @@ class timetable extends React.Component {
     render() {
         return(
             <Fragment>
-                <Navbar />
+                <Navbar token='event'/>
                 <div className="container">
                     {/* <div className="d-flex justify-content-center"></div> */}
                     <p>Today's date: {this.state.curDate}</p>

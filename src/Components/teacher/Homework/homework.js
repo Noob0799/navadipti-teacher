@@ -79,7 +79,7 @@ class homework extends React.Component {
     render() {
         return(
             <Fragment>
-                <Navbar />
+                <Navbar token='homework'/>
                 <div className="jumbotron m-1">
                     <h5>Add Homework:</h5>
                 </div>

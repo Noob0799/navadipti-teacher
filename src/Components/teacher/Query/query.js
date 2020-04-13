@@ -40,7 +40,7 @@ class query extends React.Component {
     render() {
         return(
             <Fragment>
-                <Navbar/>
+                <Navbar token='query'/>
                 <button type="button" className="btn btn-dark text" onClick={this.handleClick}><i className="fa fa-plus" aria-hidden="true"></i></button>
                 <div className="accordion" id="space">
                     {

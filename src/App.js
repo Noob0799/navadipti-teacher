@@ -7,6 +7,7 @@ import syllabus from '../src/Components/teacher/Syllabus/syllabus';
 import homework from '../src/Components/teacher/Homework/homework';
 import announcement from './Components/teacher/Announcement/announcement';
 import query from '../src/Components/teacher/Query/query';
+import record from '../src/Components/teacher/record';
 
 const App = () => (
   <Router>
@@ -17,6 +18,7 @@ const App = () => (
         <Route exact path='/homework' component={homework}/>
         <Route exact path='/announcement' component={announcement}/>
         <Route exact path='/query' component={query}/>
+        <Route exact path='/record' component={record}/>
       </Fragment>
     </Router>
 );

@@ -47,7 +47,7 @@ class announcement extends React.Component {
     render() {
         return(
             <Fragment>
-                <Navbar />
+                <Navbar token='announcement'/>
                 <form className="mx-3">
                 <label>Date of Announcement:</label><br/>
                 <label>{this.state.curDate}</label><br/>
