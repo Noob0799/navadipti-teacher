@@ -1,7 +1,10 @@
 import React, { Fragment } from 'react';
 import Navbar from '../../navbar';
+import './timetable.css';
 import Calendar from 'react-calendar';
 import Axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class timetable extends React.Component {
     constructor(props){
@@ -11,7 +14,7 @@ class timetable extends React.Component {
             minDate: ''
         };
         this.getDate = this.getDate.bind(this);
-        // this.showCalendar = this.showCalendar.bind(this);
+        this.addEvent = this.addEvent.bind(this);
     }
 
     componentDidMount() {
@@ -60,23 +63,31 @@ class timetable extends React.Component {
                 .then((res) => {
                     console.log(res.data.message);
                     document.getElementById('reset').click();
+                    this.notifyA('Success');
                 },
                 err => {
                     console.log('Error');
+                    this.notifyB('Error');
                 })
         } else {
             console.log('Error');
+            this.notifyB('Error');
         }
     }
+
+    notifyA = (text) => toast.success(text, {containerId: 'A'});
+    notifyB = (text) => toast.error(text, {containerId: 'B'});
 
     render() {
         return(
             <Fragment>
                 <Navbar token='event'/>
+                <ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.TOP_CENTER} autoClose={2000}/>
+                <ToastContainer enableMultiContainer containerId={'B'} position={toast.POSITION.TOP_CENTER} autoClose={2000}/>
                 <div className="container">
-                    {/* <div className="d-flex justify-content-center"></div> */}
-                    <p>Today's date: {this.state.curDate}</p>
-                    {/* <button type="button" className="btn btn-dark m-2" onClick={this.showCalendar}>Calendar</button> */}
+                    <div className="datedisplay">
+                        Today's date: {this.state.curDate}
+                    </div>
                     <div id="calendar">
                         <Calendar/>
                     </div>

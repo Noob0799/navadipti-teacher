@@ -1,3 +1,7 @@
 .container {
     overflow-y: scroll;
 }
+
+div.datedisplay {
+    font-size: small;
+}

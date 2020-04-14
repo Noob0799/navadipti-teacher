@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import Axios from 'axios';
 import './ModalComponent.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default class ModalComponentNew extends React.Component {
     constructor(props){
@@ -55,23 +57,30 @@ export default class ModalComponentNew extends React.Component {
                         .then(res => {
                             console.log(res.data.message);
                             this.props.receive(res.data.body);
+                            this.notifyA('Success');
                             const modal = document.getElementById("myModalNew");
                             modal.style.display = "none";
                         })
                 },
                 err => {
                     console.log('Error');
+                    this.notifyB('Error');
                 })
         } else {
             console.log('Error');
+            this.notifyB('Error');
         }
     }
+
+    notifyA = (text) => toast.success(text, {containerId: 'A'});
+    notifyB = (text) => toast.error(text, {containerId: 'B'});
 
     render(){
         return(
             <Fragment>
                     <button id="myBtnNew" onClick={this.handleShow} hidden>Open Modal</button>
-
+                    <ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.TOP_CENTER} autoClose={2000}/>
+                    <ToastContainer enableMultiContainer containerId={'B'} position={toast.POSITION.TOP_CENTER} autoClose={2000}/>
                     <div id="myModalNew" className="modal">
                         <div className="modal-content">
                             <div className="closecontainer">

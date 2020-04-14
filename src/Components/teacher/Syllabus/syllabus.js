@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import Navbar from '../../navbar';
 import Axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class syllabus extends React.Component {
     constructor(props){
@@ -8,6 +10,7 @@ class syllabus extends React.Component {
         this.state = {
             token: ''
         };
+        this.addSyllabus = this.addSyllabus.bind(this);
     }
 
     componentDidMount() {
@@ -52,19 +55,28 @@ class syllabus extends React.Component {
                 .then(res => {
                     console.log(res.data.message);
                     document.getElementById('rreset').click();
+                    this.notifyA('Success');
                 },
                 err => {
                     console.log('Error');
+                    this.notifyB('Error');
                 })
         } else {
             console.log('Error');
+            this.notifyB('Error');
         }
     }
+
+    notifyA = (text) => toast.success(text, {containerId: 'A'});
+    notifyB = (text) => toast.error(text, {containerId: 'B'});
+
 
     render() {
         return(
             <Fragment>
                 <Navbar token={this.state.token}/>
+                <ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.TOP_CENTER} autoClose={2000}/>
+                <ToastContainer enableMultiContainer containerId={'B'} position={toast.POSITION.TOP_CENTER} autoClose={2000}/>
                 <div className="jumbotron m-1">
                     <h5>Add Syllabus:</h5>
                 </div>

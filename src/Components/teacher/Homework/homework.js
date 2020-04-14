@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import Navbar from '../../navbar';
 import Axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class homework extends React.Component {
     constructor(props){
@@ -9,6 +11,7 @@ class homework extends React.Component {
             minDate: ''
         };
         this.getDate = this.getDate.bind(this);
+        this.addHomework = this.addHomework.bind(this);
     }
 
     componentDidMount() {
@@ -67,19 +70,27 @@ class homework extends React.Component {
                 .then(res => {
                     console.log(res.data.message);
                     document.getElementById('hreset').click();
+                    this.notifyA('Success');
                 },
                 err => {
                     console.log('Error');
+                    this.notifyB('Error');
                 })
         } else {
             console.log('Error');
+            this.notifyB('Error');
         }
     }
+
+    notifyA = (text) => toast.success(text, {containerId: 'A'});
+    notifyB = (text) => toast.error(text, {containerId: 'B'});
 
     render() {
         return(
             <Fragment>
                 <Navbar token='homework'/>
+                <ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.TOP_CENTER} autoClose={2000}/>
+                <ToastContainer enableMultiContainer containerId={'B'} position={toast.POSITION.TOP_CENTER} autoClose={2000}/>
                 <div className="jumbotron m-1">
                     <h5>Add Homework:</h5>
                 </div>

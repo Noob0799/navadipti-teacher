@@ -38,7 +38,7 @@ class Card extends React.Component {
                         <div id={"example-collapse-text" + this.state.data._id} className="homework-container card m-1 p-1" disabled>
                             <div className="card-body">
                                 <label className="card-text">{this.state.data.details}</label><br/>
-                                <label className="card-text">{this.state.data.name}</label>
+                                <label className="card-text">{this.state.data.author}</label>
                             </div>
                         </div>
                     </Collapse>
