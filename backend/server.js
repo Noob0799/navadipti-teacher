@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 const port = process.env.PORT || "5000";
-app.use(bodyParser.json({limit: '10MB', extended: true}))
+app.use(express.json({limit: '10MB', extended: true}))
 app.use(bodyParser.urlencoded({limit: '10MB', extended: true}))
 
 mongoose.connect("mongodb+srv://noob:XHfaVoZsq8AvbqC8@cluster0-atyzx.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true,  useUnifiedTopology: true })
