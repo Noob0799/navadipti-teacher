@@ -2,7 +2,13 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "project backend for e-commerce website",
-  "main": "server.js",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "mongoose": "^5.9.7",
+    "nodemon": "^2.0.3",
+    "express": "^4.17.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
@@ -13,8 +19,5 @@
     "node": "12.14.1"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "react-redux": "^7.2.0"
-  }
+  "license": "ISC"
 }
