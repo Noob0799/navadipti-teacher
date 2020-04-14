@@ -8,7 +8,7 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
-  },,
+  },
   "engines": {
       "node": "12.14.1"
   },
