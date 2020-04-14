@@ -59,7 +59,7 @@ class timetable extends React.Component {
         if(date && name) {
             const eventDetails = {name: name, date: date, class: clas, time: time, details: details};
             console.log('Event Details', eventDetails);
-            Axios.post("http://localhost:5000/event/add", {data: eventDetails})
+            Axios.post("/event/add", {data: eventDetails})
                 .then((res) => {
                     console.log(res.data.message);
                     document.getElementById('reset').click();

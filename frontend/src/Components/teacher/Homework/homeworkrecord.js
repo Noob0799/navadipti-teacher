@@ -15,7 +15,7 @@ class HomeworkRecord extends React.Component {
     }
 
     componentDidMount() {
-        Axios.get("http://localhost:5000/homework/get")
+        Axios.get("/homework/get")
             .then(res => {
                 console.log(res.data.message, res.data.data);
                 this.setState({

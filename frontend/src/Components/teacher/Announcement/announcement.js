@@ -59,7 +59,7 @@ class announcement extends React.Component {
                 <ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.TOP_CENTER} autoClose={2000}/>
                 <ToastContainer enableMultiContainer containerId={'B'} position={toast.POSITION.TOP_CENTER} autoClose={2000}/>
                 <div className="jumbotron m-1">
-                    <h5>Adds Announcement:</h5>
+                    <h5>Add Announcement:</h5>
                 </div>
                 <form className="mx-3">
                 <label>Date of Announcement:</label><br/>

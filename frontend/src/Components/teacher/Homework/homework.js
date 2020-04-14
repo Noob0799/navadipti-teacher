@@ -66,7 +66,7 @@ class homework extends React.Component {
         if(hclass && hsubject && hdate && hdetails) {
             const homework = {class: hclass, subject: hsubject, date: hdate, details: hdetails};
             console.log('Homework', homework);
-            Axios.post("http://localhost:5000/homework/add", {data: homework})
+            Axios.post("/homework/add", {data: homework})
                 .then(res => {
                     console.log(res.data.message);
                     document.getElementById('hreset').click();

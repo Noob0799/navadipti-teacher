@@ -15,7 +15,7 @@ class AnnouncementRecord extends React.Component {
     }
 
     componentDidMount() {
-        Axios.get("http://localhost:5000/announcement/get")
+        Axios.get("/announcement/get")
             .then(res => {
                 console.log(res.data.message, res.data.data);
                 this.setState({

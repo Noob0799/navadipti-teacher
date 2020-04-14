@@ -49,11 +49,11 @@ export default class ModalComponentNew extends React.Component {
         if(mname && mtext) {
             const message = {name: mname, text: mtext, token: 'new', id: '', reply: [], date: this.state.curDate};
             console.log('Message', message);
-            Axios.post("http://localhost:5000/query/add", {data: message})
+            Axios.post("/query/add", {data: message})
                 .then((res) => {
                     console.log(res.data.message);
                     document.getElementById('mresetNew').click();
-                    Axios.get("http://localhost:5000/query/find")
+                    Axios.get("/query/find")
                         .then(res => {
                             console.log(res.data.message);
                             this.props.receive(res.data.body);

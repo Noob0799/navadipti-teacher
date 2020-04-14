@@ -33,7 +33,7 @@ class query extends React.Component {
     }
 
     getData() {
-        Axios.get("http://localhost:5000/query/find")
+        Axios.get("/query/find")
             .then(res => {
                 console.log(res.data.message);
                 this.handleReceive(res.data.body);

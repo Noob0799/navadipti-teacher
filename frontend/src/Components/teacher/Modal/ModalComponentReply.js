@@ -57,11 +57,11 @@ export default class ModalComponentReply extends React.Component {
             const message = {name: mname, text: mtext, token: 'reply',date: this.state.curDate};
             this.state.chat.reply.push(message);
             console.log('Updated chat', this.state.chat);
-            Axios.put("http://localhost:5000/query/update", {data: this.state.chat})
+            Axios.put("/query/update", {data: this.state.chat})
                 .then((res) => {
                     console.log(res.data.message);
                     document.getElementById('mresetReply').click();
-                    Axios.get("http://localhost:5000/query/find")
+                    Axios.get("/query/find")
                         .then(res => {
                             console.log(res.data.message);
                             this.props.receive(res.data.body);

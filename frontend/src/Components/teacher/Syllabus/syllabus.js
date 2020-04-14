@@ -51,7 +51,7 @@ class syllabus extends React.Component {
         if(cclass && ssubject && tterm && details) {
             const syllabus = {class: cclass, subject: ssubject, term: tterm, details: details};
             console.log('Syllabus', syllabus);
-            Axios.post("http://localhost:5000/syllabus/add", {data: syllabus})
+            Axios.post("/syllabus/add", {data: syllabus})
                 .then(res => {
                     console.log(res.data.message);
                     document.getElementById('rreset').click();

@@ -15,7 +15,7 @@ class TimetableRecord extends React.Component {
     }
 
     componentDidMount() {
-        Axios.get("http://localhost:5000/event/get")
+        Axios.get("/event/get")
             .then(res => {
                 console.log(res.data.message, res.data.data);
                 this.setState({
