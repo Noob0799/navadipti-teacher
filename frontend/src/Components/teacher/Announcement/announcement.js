@@ -33,7 +33,7 @@ class announcement extends React.Component {
         if(aclass && adetails && author) {
             const announcement = {class: aclass, author: author, date: this.state.curDate, details: adetails};
             console.log('Announcement', announcement);
-            Axios.post("http://localhost:5000/announcement/add", {data: announcement})
+            Axios.post("/announcement/add", {data: announcement})
                 .then(res => {
                     console.log(res.data.message);
                     document.getElementById('areset').click();
@@ -59,7 +59,7 @@ class announcement extends React.Component {
                 <ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.TOP_CENTER} autoClose={2000}/>
                 <ToastContainer enableMultiContainer containerId={'B'} position={toast.POSITION.TOP_CENTER} autoClose={2000}/>
                 <div className="jumbotron m-1">
-                    <h5>Add Announcement:</h5>
+                    <h5>Adds Announcement:</h5>
                 </div>
                 <form className="mx-3">
                 <label>Date of Announcement:</label><br/>
