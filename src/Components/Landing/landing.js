@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react';
 import {Link} from 'react-router-dom';
 import './landing.css';
+import * as logo from './logoschool.jpeg';
 
 class landing extends React.Component {
     render() {
         return (
             <Fragment>
-                <div className="heading">
-                    <h1>Nava Dipti School</h1>
+                <div className="heading p-1">
+                    <h1>Nava Dipti School <img src={logo} alt="logo" height="90" width="90"/></h1>
                 </div>
                 <div className="landingparent">
                     <ul className="list-group">
