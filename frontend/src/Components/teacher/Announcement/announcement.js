@@ -33,7 +33,7 @@ class announcement extends React.Component {
         if(aclass && adetails && author) {
             const announcement = {class: aclass, author: author, date: this.state.curDate, details: adetails};
             console.log('Announcement', announcement);
-            Axios.post("http://localhost:5000/announcement/add", {data: announcement})
+            Axios.post("localhost:5000/announcement/add", {data: announcement})
                 .then(res => {
                     console.log(res.data.message);
                     document.getElementById('areset').click();
