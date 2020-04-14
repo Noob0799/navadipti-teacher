@@ -1,0 +1,39 @@
+{
+  "name": "navadiptiteacher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.4.1",
+    "express": "^4.17.1",
+    "font-awesome": "^4.7.0",
+    "mongoose": "^5.9.7",
+    "nodemon": "^2.0.3",
+    "react": "^16.13.1",
+    "react-calendar": "^3.0.1",
+    "react-bootstrap": "^1.0.0",
+    "react-dom": "^16.13.1",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.1",
+    "react-toastify": "^5.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd backend && npm install && node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Noob0799/navadipti-teacher.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Noob0799/navadipti-teacher/issues"
+  },
+  "homepage": "https://github.com/Noob0799/navadipti-teacher#readme"
+}

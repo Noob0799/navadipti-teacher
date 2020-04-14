@@ -10,7 +10,11 @@ const mongoose = require('mongoose');
 const app = express();
 const port = process.env.PORT || "5000";
 app.use(express.json({limit: '10MB', extended: true}))
-app.use(bodyParser.urlencoded({limit: '10MB', extended: true}))
+app.use(express.urlencoded({limit: '10MB', extended: true}))
+app.use(express.static(path.join(__dirname, "../client/build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "../client/build/index.html"));
+  });
 
 mongoose.connect("mongodb+srv://noob:XHfaVoZsq8AvbqC8@cluster0-atyzx.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true,  useUnifiedTopology: true })
   .then(() => {
