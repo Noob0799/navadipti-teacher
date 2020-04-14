@@ -83,7 +83,7 @@ class homework extends React.Component {
                 <div className="jumbotron m-1">
                     <h5>Add Homework:</h5>
                 </div>
-                <form className="mx-5">
+                <form className="mx-3">
                     <label>Class:</label><br/>
                     <select id="hclass">
                         <option value="Nursery">Nursery</option>

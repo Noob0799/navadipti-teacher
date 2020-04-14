@@ -33,3 +33,8 @@
     text-decoration: none;
     cursor: pointer;
   }
+
+  #mtextNew, #mnameNew, #mtextReply, #mnameReply {
+    width: 90%;
+    word-wrap: break-word;
+  }

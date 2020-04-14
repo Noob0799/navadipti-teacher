@@ -48,6 +48,9 @@ class announcement extends React.Component {
         return(
             <Fragment>
                 <Navbar token='announcement'/>
+                <div className="jumbotron m-1">
+                    <h5>Add Announcement:</h5>
+                </div>
                 <form className="mx-3">
                 <label>Date of Announcement:</label><br/>
                 <label>{this.state.curDate}</label><br/>
@@ -65,7 +68,7 @@ class announcement extends React.Component {
                         <option value="4">4</option>
                     </select><br/>
                 <label>Announcement:</label><br/>
-                <textarea id="adetails" /><br/>
+                <textarea id="adetails" cols="15"/><br/>
                 <div className="d-flex justify-content-center">
                     <button type="button" className="btn btn-dark m-2" onClick={this.addAnnouncement}>Add</button>
                     <button type="reset" className="btn btn-dark m-2" id="areset">Reset</button>

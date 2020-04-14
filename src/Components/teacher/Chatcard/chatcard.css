@@ -2,15 +2,22 @@
     border: 1px solid black;
     margin-bottom: 10px;
     padding: 2px;
-    size: 20px;
+    font-size: 12px;
+    word-wrap: break-word;
 }
 
 .reply {
     font-size: 10px;
-    float: right;
 }
 
 .datename {
-    font-size: 15px;
+    font-size: 10px;
     margin-top: 10px;
+}
+
+.chatbubble {
+    font-size: 12px;
+    width: 70%;
+    height: auto;
+    word-wrap: break-word;
 }

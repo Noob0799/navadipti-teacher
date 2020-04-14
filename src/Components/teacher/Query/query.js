@@ -14,12 +14,22 @@ class query extends React.Component {
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleReceive = this.handleReceive.bind(this);
+        this.myDivToFocus = React.createRef()
         this.getData();
     }
 
     handleClick() {
         ReactDOM.render(<ModalComponentNew receive={this.handleReceive}/>, document.getElementById('newmodalhere'));
         document.getElementById('myBtnNew').click();
+    }
+
+    handleOnClick = (event) => {
+        if(this.myDivToFocus.current){
+            this.myDivToFocus.current.scrollIntoView({ 
+               behavior: "smooth", 
+               block: "nearest"
+            })
+        }
     }
 
     getData() {
@@ -42,6 +52,7 @@ class query extends React.Component {
             <Fragment>
                 <Navbar token='query'/>
                 <button type="button" className="btn btn-dark text" onClick={this.handleClick}><i className="fa fa-plus" aria-hidden="true"></i></button>
+                <button type="button" className="btn btn-dark scrolldown" onClick={this.handleOnClick}><i className="fa fa-arrow-down" aria-hidden="true"></i></button>
                 <div className="accordion" id="space">
                     {
                         this.state.data.map(obj => {
@@ -53,6 +64,7 @@ class query extends React.Component {
                         })
                     }
                 </div>
+                <div ref={this.myDivToFocus}></div>
                 <div id="newmodalhere"></div>
             </Fragment>
         );

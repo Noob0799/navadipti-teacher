@@ -80,9 +80,9 @@ export default class ModalComponentNew extends React.Component {
                             </div>
                             <form>
                                 <label>Name:</label><br/>
-                                <input type="text" id="mnameNew" size="10"/><br/>
+                                <input type="text" id="mnameNew"/><br/>
                                 <label>Text:</label><br/>
-                                <textarea id="mtextNew"  cols="15"/><br/>
+                                <textarea id="mtextNew"/><br/>
                                 <div className="d-flex justify-content-center">
                                     <button type="button" className="btn btn-dark m-2" onClick={this.addMessage}>Add</button>
                                     <button type="reset" className="btn btn-dark m-2" id="mresetNew">Reset</button>

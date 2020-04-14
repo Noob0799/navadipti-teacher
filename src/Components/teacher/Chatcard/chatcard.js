@@ -41,13 +41,13 @@ export default class ChatCard extends React.Component {
       return (
         <Fragment>
           <label className="datename">{this.state.chat.date} {this.state.chat.name}</label><br/>
-          <button type="button" className="btn btn-outline-dark" onClick={this.handleToggle}
+          <div className="btn btn-outline-dark chatbubble p-1" onClick={this.handleToggle}
           aria-controls="example-collapse-text"
           aria-expanded={this.state.open}
           >
               {this.state.chat.text}
-          </button>
-          <button type="button" className="btn btn-dark reply ml-auto" id={"reply" + this.state.chat._id} onClick={this.handleReply}>Reply</button>
+          </div>
+          <button type="button" className="btn btn-dark reply ml-1" id={"reply" + this.state.chat._id} onClick={this.handleReply}>Reply</button>
           <Collapse in={this.state.open}>
               <div id="example-collapse-text" className="container-fluid" disabled>
               {
