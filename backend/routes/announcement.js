@@ -12,4 +12,11 @@ router.post('/add', (req,res,next) => {
         })
 })
 
+router.get('/get', (req,res,next) => {
+    Announcement.find({})
+        .then((result) => {
+            res.status(201).json({message: "Announcements fetched successfully!!", data: result});
+        })
+})
+
 module.exports = router;

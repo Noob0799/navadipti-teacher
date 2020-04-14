@@ -12,4 +12,12 @@ router.post('/add', (req,res,next) => {
         })
 })
 
+router.get('/get', (req,res,next) => {
+    Homework.find({})
+        .then((result) => {
+            res.status(201).json({message: "Homework fetched successfully!!", data: result});
+        })
+})
+
+
 module.exports = router;

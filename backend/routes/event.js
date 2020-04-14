@@ -12,4 +12,11 @@ router.post('/add', (req,res,next) => {
         })
 })
 
+router.get('/get', (req,res,next) => {
+    Event.find({})
+        .then((result) => {
+            res.status(201).json({message: "Events fetched successfully!!", data:result});
+        })
+})
+
 module.exports = router;
