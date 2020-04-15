@@ -9,6 +9,8 @@ class Card extends React.Component {
             open: false
         };
         this.handleToggle = this.handleToggle.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
+        this.editItem = this.editItem.bind(this);
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -21,7 +23,15 @@ class Card extends React.Component {
         this.setState({
           open: !this.state.open
         });
-      }
+    }
+
+    deleteItem() {
+        this.props.delete(this.state.data._id);
+    }
+
+    editItem() {
+        this.props.edit(this.state.data);
+    }
 
     render() {
         return(
@@ -31,6 +41,10 @@ class Card extends React.Component {
                     aria-controls={"example-collapse-text" + this.state.data._id}
                     aria-expanded={this.state.open}
                     >
+                        <div className="crossdel">
+                            <i className="fa fa-edit m-1" aria-hidden="true" onClick={this.editItem}></i>
+                            <i className="fa fa-window-close m-1" aria-hidden="true" onClick={this.deleteItem}></i>
+                        </div>
                         <label className="datename">Class: {this.state.data.class}</label><br/>
                         <label className="datename">Subject: {this.state.data.subject}</label><br/>
                         <label className="datename">Term: {this.state.data.term}</label>

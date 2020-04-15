@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import Navbar from '../../navbar';
 import Card from './card';
 import Axios from 'axios';
+import ModalComponentEdit from './ModalComponentEdit';
 
 class AnnouncementRecord extends React.Component {
     constructor(props){
@@ -9,12 +10,46 @@ class AnnouncementRecord extends React.Component {
         this.state = {
             token: '',
             data: [],
-            open: false
+            open: false,
+            editdata: {}
         };
         this.handleToggle = this.handleToggle.bind(this);
+        this.getData = this.getData.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
+        this.editItem = this.editItem.bind(this);
     }
 
     componentDidMount() {
+        this.getData();
+    }
+
+    handleToggle() {
+        this.setState({
+          open: !this.state.open
+        });
+    }
+
+    deleteItem(id) {
+        console.log('Delete', id);
+        Axios.delete("/announcement/delete", {data: {id: id}})
+            .then(res => {
+                console.log(res.data.message);
+                this.getData();
+            },
+            err => {
+                console.log('Error');
+            })
+    }
+
+    editItem(data) {
+        console.log('Edit', data._id);
+        this.setState({
+            editdata: data
+        });
+        document.getElementById('announcementeditbutton').click();
+    }
+
+    getData() {
         Axios.get("/announcement/get")
             .then(res => {
                 console.log(res.data.message, res.data.data);
@@ -28,21 +63,16 @@ class AnnouncementRecord extends React.Component {
             })
     }
 
-    handleToggle() {
-        this.setState({
-          open: !this.state.open
-        });
-    }
-
     render() {
         return(
             <Fragment>
                 <Navbar token={this.state.token}/>
+                <ModalComponentEdit data={this.state.editdata} editdone={this.getData}/>
                 {
                     this.state.data.map(obj => {
                         return (
                             <div key={obj._id}>
-                                <Card obj={obj}/>
+                                <Card obj={obj} delete={this.deleteItem} edit={this.editItem}/>
                             </div>
                         );
                     })
