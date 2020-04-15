@@ -40,7 +40,7 @@ class homework extends React.Component {
         const hdate = document.getElementById('hdate').value;
         const hdetails = document.getElementById('hdetails').value;
         if(hclass === 'Nursery' || hclass === 'KG') {
-            if(hsubject !== 'English' && hsubject !== 'Bengali' && hsubject !== 'Mathematics'){
+            if(hsubject !== 'English' && hsubject !== 'Bengali' && hsubject !== 'Mathematics' && hsubject !== 'GK'){
                 console.log('Error');
                 return;
             }
@@ -52,7 +52,7 @@ class homework extends React.Component {
             }
         }
         if(hclass === '1') {
-            if(hsubject !== 'English' && hsubject !== 'Bengali' && hsubject !== 'Mathematics' && hsubject !== 'GK' && hsubject !== 'EVS'){
+            if(hsubject !== 'English' && hsubject !== 'Bengali' && hsubject !== 'Mathematics' && hsubject !== 'GK' && hsubject !== 'EVS' && hsubject !== 'Computer'){
                 console.log('Error');
                 return;
             }
@@ -113,8 +113,9 @@ class homework extends React.Component {
                         <option value="GK">GK</option>
                         <option value="EVS">EVS</option>
                         <option value="History">History</option>
-                        <option value="Geograpgy">Geography</option>
+                        <option value="Geography">Geography</option>
                         <option value="Science">Science</option>
+                        <option value="Computer">Computer</option>
                     </select><br/>
                     <label>To be checked on:</label><br/>
                     <input type="date" id="hdate" min={this.state.minDate}/><br/>

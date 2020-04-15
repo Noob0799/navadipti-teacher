@@ -25,7 +25,7 @@ class syllabus extends React.Component {
         const tterm = document.getElementById('tterm').value;
         const details = document.getElementById('details').value;
         if(cclass === 'Nursery' || cclass === 'KG') {
-            if(ssubject !== 'English' && ssubject !== 'Bengali' && ssubject !== 'Mathematics'){
+            if(ssubject !== 'English' && ssubject !== 'Bengali' && ssubject !== 'Mathematics' && ssubject !== 'GK'){
                 console.log('Error');
                 return;
             }
@@ -37,7 +37,7 @@ class syllabus extends React.Component {
             }
         }
         if(cclass === '1') {
-            if(ssubject !== 'English' && ssubject !== 'Bengali' && ssubject !== 'Mathematics' && ssubject !== 'GK' && ssubject !== 'EVS'){
+            if(ssubject !== 'English' && ssubject !== 'Bengali' && ssubject !== 'Mathematics' && ssubject !== 'GK' && ssubject !== 'EVS' && ssubject !== 'Computer'){
                 console.log('Error');
                 return;
             }
@@ -99,8 +99,9 @@ class syllabus extends React.Component {
                         <option value="GK">GK</option>
                         <option value="EVS">EVS</option>
                         <option value="History">History</option>
-                        <option value="Geograpgy">Geography</option>
+                        <option value="Geography">Geography</option>
                         <option value="Science">Science</option>
+                        <option value="Computer">Computer</option>
                     </select><br/>
                     <label>Term:</label><br/>
                     <select id="tterm">
