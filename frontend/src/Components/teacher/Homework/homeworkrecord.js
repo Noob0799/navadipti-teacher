@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 import Navbar from '../../navbar';
 import Card from './card';
 import Axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class HomeworkRecord extends React.Component {
     constructor(props){
@@ -86,6 +88,7 @@ class HomeworkRecord extends React.Component {
             },
             err => {
                 console.log('Error');
+                this.notifyB('Error');
             })
     }
 
@@ -99,6 +102,7 @@ class HomeworkRecord extends React.Component {
         Axios.get("/homework/get")
             .then(res => {
                 console.log(res.data.message, res.data.data);
+                this.notifyA('Success');
                 const temparray = this.groupTogether(res.data.data);
                 this.setState({
                     data: temparray,
@@ -107,13 +111,19 @@ class HomeworkRecord extends React.Component {
             },
             err => {
                 console.log('Error');
+                this.notifyB('Error');
             })
     }
+
+    notifyA = (text) => toast.success(text, {containerId: 'A'});
+    notifyB = (text) => toast.error(text, {containerId: 'B'});
 
     render() {
         return(
             <Fragment>
                 <Navbar token={this.state.token}/>
+                <ToastContainer enableMultiContainer containerId={'A'} position={toast.POSITION.TOP_CENTER} autoClose={2000}/>
+                <ToastContainer enableMultiContainer containerId={'B'} position={toast.POSITION.TOP_CENTER} autoClose={2000}/>
                 {
                     this.state.data.map(obj => {
                         return (
