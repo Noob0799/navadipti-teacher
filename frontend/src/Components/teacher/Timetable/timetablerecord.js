@@ -12,9 +12,40 @@ class TimetableRecord extends React.Component {
             open: false
         };
         this.handleToggle = this.handleToggle.bind(this);
+        this.getData = this.getData.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
+        this.editItem = this.editItem.bind(this);
     }
 
     componentDidMount() {
+        this.getData();
+    }
+
+    handleToggle() {
+        this.setState({
+          open: !this.state.open
+        });
+    }
+
+    deleteItem(id) {
+        console.log('Delete', id);
+        Axios.delete("/event/delete", {data: {id: id}})
+            .then(res => {
+                console.log(res.data.message);
+                this.getData();
+            },
+            err => {
+                console.log('Error');
+            })
+    }
+
+    editItem(message) {
+        if(message) {
+            this.getData();
+        }
+    }
+
+    getData() {
         Axios.get("/event/get")
             .then(res => {
                 console.log(res.data.message, res.data.data);
@@ -28,12 +59,6 @@ class TimetableRecord extends React.Component {
             })
     }
 
-    handleToggle() {
-        this.setState({
-          open: !this.state.open
-        });
-    }
-
     render() {
         return(
             <Fragment>
@@ -42,7 +67,7 @@ class TimetableRecord extends React.Component {
                     this.state.data.map(obj => {
                         return (
                             <div key={obj._id}>
-                                <Card obj={obj}/>
+                                <Card obj={obj} delete={this.deleteItem} editdone={this.editItem}/>
                             </div>
                         );
                     })

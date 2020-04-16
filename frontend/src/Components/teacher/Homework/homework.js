@@ -3,6 +3,7 @@ import Navbar from '../../navbar';
 import Axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './homework.css';
 
 class homework extends React.Component {
     constructor(props){
@@ -39,8 +40,9 @@ class homework extends React.Component {
         const hsubject = document.getElementById('hsubject').value;
         const hdate = document.getElementById('hdate').value;
         const hdetails = document.getElementById('hdetails').value;
+        let himg = document.getElementById('himg').files[0];
         if(hclass === 'Nursery' || hclass === 'KG') {
-            if(hsubject !== 'English' && hsubject !== 'Bengali' && hsubject !== 'Mathematics'){
+            if(hsubject !== 'English' && hsubject !== 'Bengali' && hsubject !== 'Mathematics' && hsubject !== 'GK'){
                 console.log('Error');
                 return;
             }
@@ -52,7 +54,7 @@ class homework extends React.Component {
             }
         }
         if(hclass === '1') {
-            if(hsubject !== 'English' && hsubject !== 'Bengali' && hsubject !== 'Mathematics' && hsubject !== 'GK' && hsubject !== 'EVS'){
+            if(hsubject !== 'English' && hsubject !== 'Bengali' && hsubject !== 'Mathematics' && hsubject !== 'GK' && hsubject !== 'EVS' && hsubject !== 'Computer'){
                 console.log('Error');
                 return;
             }
@@ -63,20 +65,41 @@ class homework extends React.Component {
                 return;
             }
         }
-        if(hclass && hsubject && hdate && hdetails) {
-            const homework = {class: hclass, subject: hsubject, date: hdate, details: hdetails};
-            console.log('Homework', homework);
-            Axios.post("/homework/add", {data: homework})
-                .then(res => {
-                    console.log(res.data.message);
-                    document.getElementById('hreset').click();
-                    this.notifyA('Success');
-                },
-                err => {
-                    console.log('Error');
-                    this.notifyB('Error');
-                })
-        } else {
+        if ((hclass && hsubject && hdate && himg) || (hclass && hsubject && hdate && hdetails) || (hclass && hsubject && hdate && hdetails && himg)) {
+            if(himg) {
+                const reader = new FileReader();
+                reader.readAsDataURL(himg);
+                reader.onloadend = () => {
+                    himg = reader.result;
+                    const homework = {class: hclass, subject: hsubject, date: hdate, img: himg, details: hdetails};
+                    console.log('Homework', homework);
+                    Axios.post("/homework/add", {data: homework})
+                        .then(res => {
+                            console.log(res.data.message);
+                            document.getElementById('hreset').click();
+                            this.notifyA('Success');
+                        },
+                        err => {
+                            console.log('Error');
+                            this.notifyB('Error');
+                        })
+                }
+            } else {
+                himg = '';
+                const homework = {class: hclass, subject: hsubject, date: hdate, img: himg, details: hdetails};
+                console.log('Homework', homework);
+                Axios.post("/homework/add", {data: homework})
+                    .then(res => {
+                        console.log(res.data.message);
+                        document.getElementById('hreset').click();
+                        this.notifyA('Success');
+                    },
+                    err => {
+                        console.log('Error');
+                        this.notifyB('Error');
+                    })
+            }
+        }else {
             console.log('Error');
             this.notifyB('Error');
         }
@@ -113,13 +136,16 @@ class homework extends React.Component {
                         <option value="GK">GK</option>
                         <option value="EVS">EVS</option>
                         <option value="History">History</option>
-                        <option value="Geograpgy">Geography</option>
+                        <option value="Geography">Geography</option>
                         <option value="Science">Science</option>
+                        <option value="Computer">Computer</option>
                     </select><br/>
                     <label>To be checked on:</label><br/>
                     <input type="date" id="hdate" min={this.state.minDate}/><br/>
                     <label>Homework details:</label><br/>
                     <textarea id="hdetails" cols="15"/><br/>
+                    <label>Homework image:</label><br/>
+                    <input type="file" id="himg" name="himg" accept="image/*"/><br/>
                     <div className="d-flex justify-content-center">
                         <button type="button" className="btn btn-dark m-2" onClick={this.addHomework}>Add</button>
                         <button type="reset" className="btn btn-dark m-2" id="hreset">Reset</button>
