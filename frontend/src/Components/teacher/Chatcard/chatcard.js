@@ -40,7 +40,7 @@ export default class ChatCard extends React.Component {
     render() {
       return (
         <Fragment>
-          <label className="datename">{this.state.chat.date} {this.state.chat.name}</label><br/>
+          <label className="datename">{this.state.chat.date} {this.state.chat.name} {this.state.chat.class}</label><br/>
           <div className="btn btn-outline-dark chatbubble p-1" onClick={this.handleToggle}
           aria-controls="example-collapse-text"
           aria-expanded={this.state.open}
@@ -54,7 +54,7 @@ export default class ChatCard extends React.Component {
                 this.state.chat.reply.map(obj => {
                   return (
                     <div key={this.state.chat._id + Math.random()}>
-                      <div className="datename">{obj.date} {obj.name}</div>
+                      <div className="datename">{obj.date} {obj.name} {obj.class}</div>
                       <div className="chatcard">
                         {obj.text}
                       </div>
