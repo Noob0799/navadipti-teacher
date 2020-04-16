@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import Navbar from '../../navbar';
 import Card from './card';
 import Axios from 'axios';
-import ModalComponentEdit from './ModalComponentEdit';
 
 class HomeworkRecord extends React.Component {
     constructor(props){
@@ -10,8 +9,7 @@ class HomeworkRecord extends React.Component {
         this.state = {
             token: '',
             data: [],
-            open: false,
-            editid: ''
+            open: false
         };
         this.handleToggle = this.handleToggle.bind(this);
         this.getData = this.getData.bind(this);
@@ -91,12 +89,10 @@ class HomeworkRecord extends React.Component {
             })
     }
 
-    editItem(data) {
-        console.log('Edit', data);
-        this.setState({
-            editid: data._id
-        });
-        document.getElementById('homeworkeditbutton').click();
+    editItem(message) {
+        if (message) {
+            this.getData();
+        }
     }
 
     getData() {
@@ -118,12 +114,11 @@ class HomeworkRecord extends React.Component {
         return(
             <Fragment>
                 <Navbar token={this.state.token}/>
-                <ModalComponentEdit data={this.state.data} id={this.state.editid} editdone={this.getData}/>
                 {
                     this.state.data.map(obj => {
                         return (
                             <div key={obj._id}>
-                                <Card obj={obj} delete={this.deleteItem} edit={this.editItem}/>
+                                <Card obj={obj} delete={this.deleteItem} editdone={this.editItem}/>
                             </div>
                         );
                     })

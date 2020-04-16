@@ -34,12 +34,12 @@
     cursor: pointer;
   }
 
-  #homeworkeditdetails, #homeworkeditdate {
+  textarea, input[type="date"] {
     width: 90%;
     word-wrap: break-word;
   }
 
-  #homeworkeditimg {
+  input[type="file"] {
     width: 95%;
     font-size: smaller;
 }

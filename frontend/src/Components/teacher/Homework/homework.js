@@ -71,7 +71,7 @@ class homework extends React.Component {
                 reader.readAsDataURL(himg);
                 reader.onloadend = () => {
                     himg = reader.result;
-                    const homework = {class: hclass, subject: hsubject, date: hdate, img: himg};
+                    const homework = {class: hclass, subject: hsubject, date: hdate, img: himg, details: hdetails};
                     console.log('Homework', homework);
                     Axios.post("/homework/add", {data: homework})
                         .then(res => {

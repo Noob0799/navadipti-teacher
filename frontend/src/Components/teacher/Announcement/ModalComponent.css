@@ -34,7 +34,7 @@
     cursor: pointer;
   }
 
-  #announcementeditdetails {
+  textarea {
     width: 90%;
     word-wrap: break-word;
   }

@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import Navbar from '../../navbar';
 import Card from './card';
 import Axios from 'axios';
-import ModalComponentEdit from './ModalComponentEdit';
 
 class AnnouncementRecord extends React.Component {
     constructor(props){
@@ -41,12 +40,10 @@ class AnnouncementRecord extends React.Component {
             })
     }
 
-    editItem(data) {
-        console.log('Edit', data._id);
-        this.setState({
-            editdata: data
-        });
-        document.getElementById('announcementeditbutton').click();
+    editItem(message) {
+        if(message) {
+            this.getData();
+        }
     }
 
     getData() {
@@ -67,12 +64,11 @@ class AnnouncementRecord extends React.Component {
         return(
             <Fragment>
                 <Navbar token={this.state.token}/>
-                <ModalComponentEdit data={this.state.editdata} editdone={this.getData}/>
                 {
                     this.state.data.map(obj => {
                         return (
                             <div key={obj._id}>
-                                <Card obj={obj} delete={this.deleteItem} edit={this.editItem}/>
+                                <Card obj={obj} delete={this.deleteItem} editdone={this.editItem}/>
                             </div>
                         );
                     })
