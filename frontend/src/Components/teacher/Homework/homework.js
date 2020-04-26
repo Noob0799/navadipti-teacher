@@ -4,6 +4,7 @@ import Axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './homework.css';
+import {storage} from '../../../firebase/index';
 
 class homework extends React.Component {
     constructor(props){
@@ -67,32 +68,40 @@ class homework extends React.Component {
         }
         if ((hclass && hsubject && hdate && himg) || (hclass && hsubject && hdate && hdetails) || (hclass && hsubject && hdate && hdetails && himg)) {
             if(himg) {
-                const reader = new FileReader();
-                reader.readAsDataURL(himg);
-                reader.onloadend = () => {
-                    himg = reader.result;
-                    const homework = {class: hclass, subject: hsubject, date: hdate, img: himg, details: hdetails};
-                    console.log('Homework', homework);
-                    Axios.post("/homework/add", {data: homework})
-                        .then(res => {
-                            console.log(res.data.message);
-                            document.getElementById('hreset').click();
-                            this.notifyA('Success');
-                        },
-                        err => {
-                            console.log('Error');
-                            this.notifyB('Error');
+                const uploadTask = storage.ref(`images/${himg.name}`).put(himg);
+                uploadTask.on('state_changed', 
+                (snapshot) => {},
+                (error) => {
+                    console.log('Firebase image upload error', error);
+                    this.notifyB('Error');
+                },
+                () => {
+                    storage.ref('images').child(himg.name).getDownloadURL()
+                        .then(url => {
+                            console.log('URL', url);
+                            const homework = {class: hclass, subject: hsubject, date: hdate, img: url, details: hdetails};
+                            console.log('Homework', homework);
+                            Axios.post("/homework/add", {data: homework})
+                                .then(res => {
+                                    console.log(res.data.message);
+                                    this.notifyA('Success');
+                                    document.getElementById('hreset').click();
+                                },
+                                err => {
+                                    console.log('Error');
+                                    this.notifyB('Error');
+                                })
                         })
-                }
+                });
             } else {
                 himg = '';
-                const homework = {class: hclass, subject: hsubject, date: hdate, img: himg, details: hdetails};
+                const homework = {class: hclass, subject: hsubject, img: himg, date: hdate, details: hdetails};
                 console.log('Homework', homework);
                 Axios.post("/homework/add", {data: homework})
                     .then(res => {
                         console.log(res.data.message);
-                        document.getElementById('hreset').click();
                         this.notifyA('Success');
+                        document.getElementById('hreset').click();
                     },
                     err => {
                         console.log('Error');

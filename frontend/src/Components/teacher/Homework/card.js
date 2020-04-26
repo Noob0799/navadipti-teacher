@@ -4,6 +4,7 @@ import Axios from 'axios';
 import './ModalComponent.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {storage} from '../../../firebase/index';
 
 class Card extends React.Component {
     constructor(props){
@@ -100,23 +101,31 @@ class Card extends React.Component {
         }
         if ((details && clas && subject && date) || (img && clas && subject && date) || (details && img && clas && subject && date)) {
             if(img) {
-                const reader = new FileReader();
-                reader.readAsDataURL(img);
-                reader.onloadend = () => {
-                    img = reader.result;
-                    const message = {_id: this.state.data._id, details: details, class: clas, subject: subject, date: date, img: img};
-                    Axios.put("/homework/edit", {data: {data: message}})
-                        .then((res) => {
-                            console.log(res.data.message);
-                            document.getElementById('homeworkeditclose' + this.state.data._id).click();
-                            this.notifyA('Success');
-                            this.props.editdone(res.data.message);
-                        },
-                        err => {
-                            console.log('Error');
-                            this.notifyB('Error');
+                const uploadTask = storage.ref(`images/${img.name}`).put(img);
+                uploadTask.on('state_changed', 
+                (snapshot) => {},
+                (error) => {
+                    console.log('Firebase image upload error', error);
+                    this.notifyB('Error');
+                },
+                () => {
+                    storage.ref('images').child(img.name).getDownloadURL()
+                        .then(url => {
+                            console.log('URL', url);
+                            const message = {_id: this.state.data._id, details: details, class: clas, subject: subject, date: date, img: url};
+                            Axios.put("/homework/edit", {data: {data: message}})
+                                .then((res) => {
+                                    console.log(res.data.message);
+                                    document.getElementById('homeworkeditclose' + this.state.data._id).click();
+                                    this.notifyA('Success');
+                                    this.props.editdone(res.data.message);
+                                },
+                                err => {
+                                    console.log('Error');
+                                    this.notifyB('Error');
+                                })
                         })
-                }
+                });
             } else {
                 if(this.state.data.img) {
                     img = this.state.data.img;
